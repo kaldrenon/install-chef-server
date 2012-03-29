@@ -39,6 +39,6 @@ rm sudoers
 #   - Run the script as the chef user
 sudo su -l $USER -c "rvm install 1.9.2; 
   rvm use 1.9.2 --default; 
-  wget http://kaldrenon.com/code/scripts/install-chef-server.sh;
+  wget https://raw.github.com/kaldrenon/install-chef-server/master/install-chef-server.sh;
   chmod a+x install-chef-server.sh;
   sudo -u chef ./install-chef-server"
