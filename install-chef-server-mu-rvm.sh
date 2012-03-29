@@ -26,11 +26,19 @@ wget http://kaldrenon.com/code/scripts/sudoers
 sudo cp sudoers /etc/sudoers
 rm sudoers
 
-#Install 1.9.3 as default user
-rvm install 1.9.2 
-rvm use 1.9.2 --default
-
-#Install 1.9.2 and chef stack as chef
-wget http://kaldrenon.com/code/scripts/install-chef-server.sh
-chmod a+x install-chef-server.sh
-sudo -u chef ./install-chef-server
+# This ugly mess enables this script to all be run from one file. Because user
+# group settings are only updated at login, the default user won't be able to
+# install ruby with a simple invocation, and entering a new session will 
+# interrupt and kill the script. However, su -c enables us to run a command
+# sequence as another user, and -l performs a login. Here, we log in /as the 
+# same user/ and run the remaining commands:
+#
+#   - Install 1.9.3 as default user
+#   - Download chef installation script
+#   - Make the script executable
+#   - Run the script as the chef user
+sudo su -l $USER -c "rvm install 1.9.2; 
+  rvm use 1.9.2 --default; 
+  wget http://kaldrenon.com/code/scripts/install-chef-server.sh;
+  chmod a+x install-chef-server.sh;
+  sudo -u chef ./install-chef-server"
