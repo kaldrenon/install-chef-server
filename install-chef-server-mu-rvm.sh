@@ -12,9 +12,6 @@ then
     -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
 fi
 
-# Put RVM into mixed mode (separate rubies and gemsets per user)
-rvm user all
-
 # Manage some user roles - allow chef and default user to install gems
 sudo useradd -m chef -s /bin/bash
 sudo usermod -a -G admin chef
@@ -33,11 +30,13 @@ rm sudoers
 # sequence as another user, and -l performs a login. Here, we log in /as the 
 # same user/ and run the remaining commands:
 #
+#   - Put RVM into mixed mode (separate rubies and gemsets per user)
 #   - Install 1.9.3 as default user
 #   - Download chef installation script
 #   - Make the script executable
 #   - Run the script as the chef user
-sudo su -l $USER -c "rvm install 1.9.2; 
+sudo su -l $USER -c "rvm user all;
+  rvm install 1.9.2; 
   rvm use 1.9.2 --default; 
   wget https://raw.github.com/kaldrenon/install-chef-server/master/install-chef-server.sh;
   chmod a+x install-chef-server.sh;
