@@ -19,7 +19,7 @@ sudo usermod -a -G rvm chef
 sudo usermod -a -G rvm `whoami`
 
 # Copy a sudoers file that allows chef to run sudo without password
-wget http://kaldrenon.com/code/scripts/sudoers
+wget https://raw.github.com/kaldrenon/install-chef-server/master/sudoers
 sudo cp sudoers /etc/sudoers
 rm sudoers
 
@@ -33,11 +33,13 @@ rm sudoers
 #   - Put RVM into mixed mode (separate rubies and gemsets per user)
 #   - Install 1.9.3 as default user
 #   - Download chef installation script
-#   - Make the script executable
+#   - Make the script executable, move it to chef's home dir and chown it
 #   - Run the script as the chef user
 sudo su -l $USER -c "rvm user all;
   rvm install 1.9.2; 
   rvm use 1.9.2 --default; 
   wget https://raw.github.com/kaldrenon/install-chef-server/master/install-chef-server.sh;
   chmod a+x install-chef-server.sh;
+  sudo mv install-chef-server.sh /home/chef;
+  sudo chown chef /home/chef/install-chef-server;
   sudo -u chef ./install-chef-server"
