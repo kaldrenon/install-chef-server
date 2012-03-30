@@ -38,8 +38,6 @@ rm sudoers
 sudo su -l $USER -c "rvm user all;
   rvm install 1.9.3; 
   rvm use 1.9.3- --default; 
-  wget https://raw.github.com/kaldrenon/install-chef-server/master/install-chef-server.sh;
   chmod a+x install-chef-server.sh;
-  sudo mv install-chef-server.sh /home/chef;
-  sudo chown chef /home/chef/install-chef-server;
-  sudo su - chef -c \"./install-chef-server\""
+  sudo chown -R chef /home/ubuntu/install-chef-server;
+  sudo su - chef -c \"/home/ubuntu/install-chef-server/install-chef-server.sh\""

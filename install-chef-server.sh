@@ -74,10 +74,9 @@ sudo rabbitmqctl set_permissions -p /chef chef ".*" ".*" ".*"
 sudo rabbitmq-plugins enable rabbitmq_management
 sudo service rabbitmq-server restart
 
-# check if have the right version of ruby with the correct libs available,
-# if not we reinstall
-! (rvm use 1.9.2 && ruby -e "require 'openssl' ; require 'zlib'" 2> /dev/null) \
-  && rvm reinstall 1.9.2 && rvm use 1.9.2 --default
+# tell rvm to install ruby 1.9.2 as chef and to make it default
+rvm install 1.9.2
+rvm use 1.9.2 --default
 
 # install the chef gems (if we don't already have them)
 for gem in chef-server chef-server-api chef-solr chef-server-webui 
@@ -112,7 +111,7 @@ sudo chown -R `whoami` /var/log/chef
 [ ${CHEF_SERVER_USER} ] || CHEF_SERVER_USER=`whoami`
 # the chef gems supply some upstart scripts, but they run everything as root
 # we'd rather run as whatever chef user we're using
-for file in `find ~/.rvm/ | grep debian/etc/init/ | grep -v client`
+for file in `find /usr/local/rvm/ | grep debian/etc/init/ | grep -v client`
 do
   outfile=`basename ${file}`
   service=${outfile%.conf}
