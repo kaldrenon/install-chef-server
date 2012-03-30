@@ -19,4 +19,16 @@ In order, here are the high level bullet points of what the script does:
 * Install Ruby 1.9.3 on current user and set that version to default.
 * Install Ruby 1.9.2 on chef user and set that to default.
 * Run [http://github.com/pikesley pikesley]<nowiki/>'s chef-server installaction script as chef user.
+** Installs CouchDB
+** Installs and configures RabbitMQ (a more recent version than is in the Ubuntu repos)
+** Installs Sun Java 1.6 (using this witchcraft)
+** Installs OpsCode's Gecode
+** Installs the Chef gems
+** Configures the Chef server
+** Creates upstart scripts for each of the Chef components
 
+At the end of script execution, you run through <code>knife configure -i</code> and once that is complete, you should find that the machine is now ready to be a chef server.
+
+=== Warning ===
+
+This script was modified with a speicifc intent for install these particular versions of ruby on a brank spankin' new Ubuntu 11.10 image. I have done a lot less of the clever work to make it [http://http://en.wikipedia.org/wiki/Idempotence idempotent] that made Sam's script worth stealing in the first place. I have not tested it under any other conditions. You'll probably have to tweak it.
