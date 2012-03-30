@@ -19,9 +19,7 @@ sudo usermod -a -G rvm chef
 sudo usermod -a -G rvm `whoami`
 
 # Copy a sudoers file that allows chef to run sudo without password
-wget https://raw.github.com/kaldrenon/install-chef-server/master/sudoers
 sudo cp sudoers /etc/sudoers
-rm sudoers
 
 # This ugly mess enables this script to all be run from one file. Because user
 # group settings are only updated at login, the default user won't be able to
@@ -37,7 +35,7 @@ rm sudoers
 #   - Run the script as the chef user
 sudo su -l $USER -c "rvm user all;
   rvm install 1.9.3; 
-  rvm use 1.9.3- --default; 
-  chmod a+x install-chef-server.sh;
+  rvm use 1.9.3 --default; 
+  chmod a+x /home/ubuntu/install-chef-server.sh;
   sudo chown -R chef /home/ubuntu/install-chef-server;
-  sudo su - chef -c \"/home/ubuntu/install-chef-server/install-chef-server.sh\""
+  sudo su - chef -l -c \"/home/ubuntu/install-chef-server/install-chef-server.sh\""
