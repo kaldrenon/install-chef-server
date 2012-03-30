@@ -21,21 +21,20 @@ sudo usermod -a -G rvm `whoami`
 # Copy a sudoers file that allows chef to run sudo without password
 sudo cp sudoers /etc/sudoers
 
-# This ugly mess enables this script to all be run from one file. Because user
-# group settings are only updated at login, the default user won't be able to
-# install ruby with a simple invocation, and entering a new session will 
-# interrupt and kill the script. However, su -c enables us to run a command
-# sequence as another user, and -l performs a login. Here, we log in /as the 
-# same user/ and run the remaining commands:
+# This su creates a new login session for the active user, allowing the recent
+# user modifications to count when rvm install is invoked.
 #
 #   - Put RVM into mixed mode (separate rubies and gemsets per user)
 #   - Install 1.9.3 as default user
-#   - Download chef installation script
-#   - Make the script executable, move it to chef's home dir and chown it
-#   - Run the script as the chef user
 sudo su -l $USER -c "rvm user all; rvm install 1.9.3; rvm use 1.9.3 --default"
 
-chmod a+x /home/ubuntu/install-chef-server.sh;
+# Make sure the scripts are executable by chef
+chmod a+x /home/ubuntu/install-chef-server/*.sh;
 sudo chown -R chef /home/ubuntu/install-chef-server;
+
+# Install 1.9.2 as default as chef user (using same login trick as before)
 sudo su - chef -l -c "rvm install 1.9.2; rvm use 1.9.2 --default"
-sudo su - chef -l -c "/home/ubuntu/install-chef-server/install-chef-server.sh"
+
+# Run the remainder of the chef-server install as chef
+sudo su - chef -l -c "cd /home/ubuntu/install-chef-server; 
+                      ./install-chef-server.sh"
