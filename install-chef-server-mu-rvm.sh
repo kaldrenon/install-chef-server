@@ -33,9 +33,9 @@ sudo cp sudoers /etc/sudoers
 #   - Download chef installation script
 #   - Make the script executable, move it to chef's home dir and chown it
 #   - Run the script as the chef user
-sudo su -l $USER -c "rvm user all;
-  rvm install 1.9.3; 
-  rvm use 1.9.3 --default; 
-  chmod a+x /home/ubuntu/install-chef-server.sh;
-  sudo chown -R chef /home/ubuntu/install-chef-server;
-  sudo su - chef -l -c \"/home/ubuntu/install-chef-server/install-chef-server.sh\""
+sudo su -l $USER -c "rvm user all; rvm install 1.9.3; rvm use 1.9.3 --default"
+
+chmod a+x /home/ubuntu/install-chef-server.sh;
+sudo chown -R chef /home/ubuntu/install-chef-server;
+sudo su - chef -l -c "rvm install 1.9.2; rvm use 1.9.2 --default"
+sudo su - chef -l -c "/home/ubuntu/install-chef-server/install-chef-server.sh"
