@@ -1,11 +1,22 @@
+== Using the Script ==
+ sudo apt-get install -y git-core
+ git clone https://github.com/kaldrenon/install-chef-server.git
+ chmod a+x install-chef-server/*.sh
+ install-chef-server/install-chef-server-mu-rvm.sh
 
+== About ==
 
+This script is based heavily on work done by Sam Pikesley in a similar effort that can be found [http://github.com/pikesley/catering-college here]. My <code>install-chef-server.sh</code> is more than half his doing.
 
-**Almost** all of the work for this script was done by [Sam Pikesley](http://github.com/pikesley). The install-chef-server script here is 99% his doing. 
-I changed:
-* the Ruby version from 1.9.2 to 1.9.2 (which took about 4 keystrokes)
-* one or two other lines to account for issues I encountered running manually (e.g. added `autoconf` to the list of apt-get installs)
+In order, here are the high level bullet points of what the script does:
+* Install Ruby dependencies through aptitude
+* Install RVM in multi-user mode
+* Create a user named chef
+* Add chef to admin group
+* Add chef and current user to rvm group
+* Modify sudoers file to allow all admin users to sudo w/o password
+* Put RVM into mixed mode so that rubies and gemsets are managed per user
+* Install Ruby 1.9.3 on current user and set that version to default.
+* Install Ruby 1.9.2 on chef user and set that to default.
+* Run [http://github.com/pikesley pikesley]<nowiki/>'s chef-server installaction script as chef user.
 
-I wrote `init-chef-server.sh`, which simply automates instructions that can be found in his Readme at http://github.com/pikesley/catering-college
-
-I created this repo separately so that I could maintain my version and make it easier to access. I will be updating the SH to pull the extra files from here instead of from my server once all necessary files are where they need to be.
