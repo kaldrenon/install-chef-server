@@ -6,7 +6,7 @@
 #set -e
 
 # needs setting on vagrant VMs for some reason
-PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
+PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin:${GEM_PATH}
 
 STARTDIR=`pwd`
 
