@@ -74,10 +74,6 @@ sudo rabbitmqctl set_permissions -p /chef chef ".*" ".*" ".*"
 sudo rabbitmq-plugins enable rabbitmq_management
 sudo service rabbitmq-server restart
 
-# tell rvm to install ruby 1.9.2 as chef and to make it default
-rvm install 1.9.2
-rvm use 1.9.2 --default
-
 # install the chef gems (if we don't already have them)
 for gem in chef-server chef-server-api chef-solr chef-server-webui 
 do

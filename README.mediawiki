@@ -31,4 +31,4 @@ At the end of script execution, you run through <code>knife configure -i</code> 
 
 === Warning ===
 
-This script was modified with a speicifc intent for install these particular versions of ruby on a brank spankin' new Ubuntu 11.10 image. I have done a lot less of the clever work to make it [http://http://en.wikipedia.org/wiki/Idempotence idempotent] that made Sam's script worth stealing in the first place. I have not tested it under any other conditions. You'll probably have to tweak it.
+This script was modified with a speicifc intent for installing these particular versions of ruby on a brand spankin' new Ubuntu 11.10 image. I have done a lot less of the clever work to make it [http://http://en.wikipedia.org/wiki/Idempotence idempotent] that made Sam's script worth stealing in the first place. I have not tested it under any other conditions. You'll probably have to tweak it.
