@@ -41,31 +41,6 @@ then
   sudo apt-key add rabbitmq-signing-key-public.asc
 fi
 
-#### prepare Sun java debs via this witchcraft
-#### https://github.com/flexiondotorg/oab-java6
-###if [ ! -e /var/local/oab/deb/sun-java6-jre* ]
-###then
-###  cd /tmp/
-###  wget https://raw.github.com/flexiondotorg/oab-java6/master/oab-java6.sh \
-###    -O oab-java6.sh
-###  chmod +x oab-java6.sh 
-###  sudo ./oab-java6.sh
-###fi
-
-# install some packages
-sudo apt-get -y -q update
-sudo apt-get -y -q install curl
-sudo apt-get -y -q install build-essential
-sudo apt-get -y -q install couchdb
-sudo apt-get -y -q install zlib1g-dev
-sudo apt-get -y -q install libxml2-dev
-sudo apt-get -y -q install nginx
-
-sudo apt-get -y -q install opscode-keyring
-sudo apt-get -y -q install libgecode-dev
-sudo apt-get -y -q install rabbitmq-server
-`java -version 2> /dev/null` && sudo apt-get -y -q install openjdk-6-jdk
-
 # configure rabbit (if it's not already done)
 [ "`sudo rabbitmqctl list_vhosts | grep chef`" ] \
   || sudo rabbitmqctl add_vhost /chef
