@@ -12,7 +12,7 @@ sudo apt-get -y -q install couchdb
 sudo apt-get -y -q install zlib1g-dev
 sudo apt-get -y -q install libxml2-dev
 sudo apt-get -y -q install nginx
-
+sudo apt-get -y -q install openjdk-7-jre-headless
 sudo apt-get -y -q install opscode-keyring
 sudo apt-get -y -q install libgecode-dev
 sudo apt-get -y -q install rabbitmq-server
