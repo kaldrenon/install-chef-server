@@ -4,6 +4,8 @@
  chmod a+x install-chef-server/*.sh
  install-chef-server/install-chef-server-mu-rvm.sh
 
+(See the note at the end of the 'About' section)
+
 == About ==
 
 This script is based heavily on work done by Sam Pikesley in a similar effort that can be found [http://github.com/pikesley/catering-college here]. My <code>install-chef-server.sh</code> is more than half his doing.
@@ -28,6 +30,14 @@ In order, here are the high level bullet points of what the script does:
 ** Creates upstart scripts for each of the Chef components
 
 At the end of script execution, you run through <code>knife configure -i</code> and once that is complete, you should find that the machine is now ready to be a chef server.
+
+'''Note:''' As of the most recent update (04/06/2012), two commands do not execute properly when install-chef-server is run as the user chef. This does not appear to cause any problems, but you ''will'' want to run them manually after installation completes:
+
+ sudo su - chef
+ chef-solr-installer -f
+ knife configure -i
+
+I intend to figure out why these commands are not working and resolve the issue, but unfortunately I will probably not have time for a while. Please contact me if you think you know the cause.
 
 === Warning ===
 
